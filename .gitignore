@@ -155,3 +155,4 @@ cython_debug/
 words_250000_train.txt
 train_words.txt
 eval_words.txt
+logs/

@@ -1,7 +1,7 @@
 from arguments import get_args
 from environment import HangmanEnv
-from dataset import prepare_dataset
-from policy import HangmanPolicy
+from dataset import prepare_dataset, read_file
+from policy import HangmanPolicy, HangmanFeaturesExtractor
 
 import gymnasium as gym
 
@@ -21,6 +21,10 @@ def main(args):
         for word, orig in eval_words:
             f.write(word + " " + orig + "\n")
     
+    # train_words = read_file('train_words.txt')
+    # eval_words = read_file('eval_words.txt')
+    # max_word_length = 40
+    
     print(f"{len(train_words)} training words, {len(eval_words)} evaluation words in dataset")
     
     train_envs = make_vec_env(
@@ -38,15 +42,22 @@ def main(args):
         policy=HangmanPolicy,
         env=train_envs,
         policy_kwargs=dict(
-            output_dim_pi=64,
             output_dim_vf=64,
             hidden_dim=args.hidden_dim,
+            features_extractor_class=HangmanFeaturesExtractor,
+            features_extractor_kwargs=dict(
+                embedding_size=64,
+            )
         ),
         verbose=1,
+        device='cuda',
+        tensorboard_log='logs',
     )
     
     print(f"Training for {args.num_steps} steps...")
     agent.learn(total_timesteps=args.num_steps)
+    
+    model.save('ppo_hangman')
     
     
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ def get_args():
     parser.add_argument(
         "--num-steps",
         type=int,
-        default=100000,
+        default=1000000,
         help="Number of steps to train for"
     )
     parser.add_argument(

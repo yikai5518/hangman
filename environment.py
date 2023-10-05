@@ -19,11 +19,11 @@ class HangmanEnv(gym.Env):
         self.max_word_length = max_word_length
         self.max_num_lives = num_lives
         
-        # obs_shape = np.concatenate([
-        #     28 * np.ones(self.max_word_length),
-        #     2 * np.ones(26)
-        # ])
-        obs_shape = 28 * np.ones(self.max_word_length)
+        obs_shape = np.concatenate([
+            28 * np.ones(self.max_word_length),
+            2 * np.ones(26)
+        ])
+        # obs_shape = 28 * np.ones(self.max_word_length)
         self.observation_space = gym.spaces.MultiDiscrete(obs_shape)
         
         self.action_space = gym.spaces.Discrete(26)
@@ -97,8 +97,8 @@ class HangmanEnv(gym.Env):
         print(f"Current state: {''.join([chr(int(x) + 96) if x > 0 else '_' for x in state])}")
         
     def get_state(self):
-        # return np.concatenate([self.state, self.used_actions])
-        return self.state + 1 # +1 to avoid -1
+        return np.concatenate([self.state + 1, self.used_actions])
+        # return self.state + 1 # +1 to avoid -1
         
     def set_option(self, option):
         self._option = option

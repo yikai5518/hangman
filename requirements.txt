@@ -1,33 +1,28 @@
-cloudpickle==2.2.1
-contourpy==1.1.1
-cycler==0.12.0
-Farama-Notifications==0.0.4
-filelock==3.12.4
-fonttools==4.43.0
-gym==0.26.2
-gym-notices==0.0.8
-gymnasium==0.29.1
-h5py==3.9.0
-importlib-metadata==6.8.0
-importlib-resources==6.1.0
-Jinja2==3.1.2
-kiwisolver==1.4.5
-MarkupSafe==2.1.3
-matplotlib==3.7.3
-mpmath==1.3.0
-networkx==3.1
-numpy==1.24.4
-packaging==23.2
-pandas==2.0.3
-Pillow==10.0.1
-pybullet==3.2.5
-pyparsing==3.1.1
-python-dateutil==2.8.2
-pytz==2023.3.post1
-six==1.16.0
-stable-baselines3==2.1.0
-sympy==1.12
-torch==2.0.1
-typing_extensions==4.8.0
-tzdata==2023.3
-zipp==3.17.0
+boltons @ file:///work/ci_py311/boltons_1677685195580/work
+brotlipy==0.7.0
+certifi @ file:///croot/certifi_1683875369620/work/certifi
+cffi @ file:///work/ci_py311/cffi_1676822533496/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+conda @ file:///croot/conda_1689269889729/work
+conda-content-trust @ file:///work/ci_py311/conda-content-trust_1676851327497/work
+conda-libmamba-solver @ file:///croot/conda-libmamba-solver_1685032319139/work/src
+conda-package-handling @ file:///croot/conda-package-handling_1685024767917/work
+conda_package_streaming @ file:///croot/conda-package-streaming_1685019673878/work
+cryptography @ file:///croot/cryptography_1686613057838/work
+idna @ file:///work/ci_py311/idna_1676822698822/work
+jsonpatch @ file:///tmp/build/80754af9/jsonpatch_1615747632069/work
+jsonpointer==2.1
+libmambapy @ file:///croot/mamba-split_1685993156657/work/libmambapy
+packaging @ file:///croot/packaging_1678965309396/work
+pluggy @ file:///work/ci_py311/pluggy_1676822818071/work
+pycosat @ file:///work/ci_py311/pycosat_1676838522308/work
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pyOpenSSL @ file:///croot/pyopenssl_1678965284384/work
+PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
+requests @ file:///croot/requests_1682607517574/work
+ruamel.yaml @ file:///work/ci_py311/ruamel.yaml_1676838772170/work
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+toolz @ file:///work/ci_py311/toolz_1676827522705/work
+tqdm @ file:///croot/tqdm_1679561862951/work
+urllib3 @ file:///croot/urllib3_1686163155763/work
+zstandard @ file:///work/ci_py311_2/zstandard_1679339489613/work
