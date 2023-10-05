@@ -72,7 +72,7 @@ class FixedCategoricalDistribution(Distribution):
         return self.distribution.sample()
 
     def mode(self):
-        return th.argmax(self.distribution.probs, dim=1)
+        return torch.argmax(self.distribution.probs, dim=1)
 
     def actions_from_params(self, action_logits, deterministic: bool = False):
         # Update the proba distribution

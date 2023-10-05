@@ -33,5 +33,16 @@ def get_args():
         default=0,
         help="Seed for training"
     )
+    parser.add_argument(
+        "--log_dir",
+        type=str,
+        default="logs",
+        help="Directory for logging"
+    )
+    parser.add_argument(
+        "--eval_freq",
+        type=int,
+        default=10000,
+    )
     
     return parser.parse_args()

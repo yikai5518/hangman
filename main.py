@@ -7,6 +7,7 @@ import gymnasium as gym
 
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.callbacks import EvalCallback
 
 def main(args):
     print("Preparing dataset...")
@@ -37,6 +38,17 @@ def main(args):
             num_lives=args.num_lives,
         )
     )
+    
+    eval_envs = make_vec_env(
+        HangmanEnv,
+        n_envs=args.num_processes,
+        seed=args.seed,
+        env_kwargs=dict(
+            words=eval_words,
+            max_word_length=max_word_length,
+            num_lives=args.num_lives,
+        )
+    )
         
     agent = PPO(
         policy=HangmanPolicy,
@@ -51,11 +63,20 @@ def main(args):
         ),
         verbose=1,
         device='cuda',
-        tensorboard_log='logs',
+        tensorboard_log=args.log_dir,
+    )
+    
+    eval_callback = EvalCallback(
+        eval_envs,
+        best_model_save_path=args.log_dir,
+        log_path=args.log_dir,
+        eval_freq=args.eval_freq,
+        deterministic=True,
+        render=False,
     )
     
     print(f"Training for {args.num_steps} steps...")
-    agent.learn(total_timesteps=args.num_steps)
+    agent.learn(total_timesteps=args.num_steps, callback=eval_callback)
     
     model.save('ppo_hangman')
     
