@@ -14,6 +14,8 @@ class HangmanMLPNetwork(nn.Module):
         output_dim_vf: int,
         hidden_dim: int,
     ):
+        super().__init__()
+        
         self.latent_dim_pi = output_dim_pi
         self.latent_dim_vf = output_dim_vf
         
@@ -32,7 +34,13 @@ class HangmanMLPNetwork(nn.Module):
         )
     
     def forward(self, x):
-        return self.policy_net(x), self.value_net(x)
+        return self.forward_actor(x), self.forward_critic(x)
+    
+    def forward_critic(self, x):
+        return self.value_net(x)
+    
+    def forward_actor(self, x):
+        return self.policy_net(x)
 
 
 class HangmanPolicy(ActorCriticPolicy):
@@ -47,6 +55,10 @@ class HangmanPolicy(ActorCriticPolicy):
         *args,
         **kwargs,
     ):
+        self.output_dim_pi = output_dim_pi
+        self.output_dim_vf = output_dim_vf
+        self.hidden_dim = hidden_dim
+        
         super().__init__(
             obs_space,
             action_space,
@@ -54,10 +66,6 @@ class HangmanPolicy(ActorCriticPolicy):
             *args,
             **kwargs,
         )
-        
-        self.output_dim_pi = output_dim_pi
-        self.output_dim_vf = output_dim_vf
-        self.hidden_dim = hidden_dim
     
     def _build_mlp_extractor(self) -> None:
         self.mlp_extractor = HangmanMLPNetwork(

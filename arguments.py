@@ -33,3 +33,5 @@ def get_args():
         default=0,
         help="Seed for training"
     )
+    
+    return parser.parse_args()

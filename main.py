@@ -9,6 +9,8 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 
 def main(args):
+    print("Preparing dataset...")
+    
     train_words, eval_words, max_word_length = prepare_dataset("words_250000_train.txt")
     
     # Save words to save preprocessing time
@@ -19,6 +21,8 @@ def main(args):
         for word, orig in eval_words:
             f.write(word + " " + orig + "\n")
     
+    print(f"{len(train_words)} training words, {len(eval_words)} evaluation words in dataset")
+    
     train_envs = make_vec_env(
         HangmanEnv,
         n_envs=args.num_processes,
@@ -26,7 +30,7 @@ def main(args):
         env_kwargs=dict(
             words=train_words,
             max_word_length=max_word_length,
-            num_lives=args.num_lives
+            num_lives=args.num_lives,
         )
     )
         
@@ -40,6 +44,8 @@ def main(args):
         ),
         verbose=1,
     )
+    
+    print(f"Training for {args.num_steps} steps...")
     agent.learn(total_timesteps=args.num_steps)
     
     

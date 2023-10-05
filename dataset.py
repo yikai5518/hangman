@@ -52,5 +52,5 @@ def prepare_dataset(filename: str, train_test_split: float = 0.8):
     train_words = words[:split_len]
     test_words = words[split_len:]
     
-    return [preprocess_word(word, mode="train") for word in train_words], [preprocess_word(word, mode="test") for word in test_words], max_word_length
+    return [preprocess_word(word, mode="test") for word in train_words], [preprocess_word(word, mode="test") for word in test_words], max_word_length
     
